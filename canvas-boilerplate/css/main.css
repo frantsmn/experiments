@@ -1,0 +1,41 @@
+*,
+::before,
+::after {
+	box-sizing: border-box;
+	font-family: "Turret Road", cursive;
+}
+
+body {
+	background: #010101;
+	color: #575757;
+}
+
+/* Canvas */
+
+.canvas-container {
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+}
+
+/* Helpers */
+
+.center {
+	margin: 0 auto;
+	text-align: center;
+}
+
+.absolute {
+	top: 0;
+	left: 0;
+	position: absolute;
+}
+
+.absolute.center {
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.d-none {
+	display: none;
+}

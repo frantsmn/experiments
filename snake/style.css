@@ -1,0 +1,29 @@
+html * {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: url("absurdity.png");
+  box-sizing: border-box;
+  height: 100vh;
+}
+
+h1{
+  width: 100%;
+  text-align: center;
+  margin: 40px 0;
+  font-family: monospace;
+  font-size: 50px;
+  line-height: 50px;
+  color: #566464;
+  text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.15);
+}
+
+#game {
+  margin: 40px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.05);
+}

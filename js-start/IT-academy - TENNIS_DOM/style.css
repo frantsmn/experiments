@@ -1,0 +1,60 @@
+body{
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    /* background: #cdcdcd; */
+}
+
+#start{
+    width: 110px;
+    height: 40px;
+    background: #ddd;
+    border: 0;
+    cursor: pointer;
+}
+
+#start:active{
+    background: rgb(184, 184, 184);
+}
+
+.score{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 80px;
+}
+
+#game{
+    background: yellow;
+    border: solid black 2px;
+    position: relative;
+    overflow: hidden;
+    backface-visibility: hidden;
+}
+
+div[id*="racquet"]{
+    position: absolute;
+    width: 10px;
+    height: 25%;
+    top: 0;
+    background: green;
+}
+
+#racquetLeft{
+    left: 0;
+}
+
+#racquetRight{
+    right: 0;
+}
+
+#ball{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: red;
+    border-radius: 50%;
+}

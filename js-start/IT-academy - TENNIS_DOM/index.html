@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <script src="game.js"></script>
+    <script src="tippy-for-ball.js" defer></script>
+    <!-- <script src="tippy.js" defer></script> -->
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="start" data-changeToState="start">Старт</button>
+    <div class="score">
+        <span id="playerLeft">0</span>:<span id="playerRight">0</span>
+    </div>
+    <div id="game" class="tippy" style="width: 750px; height: 450px;">
+        <div id="racquetLeft"></div>
+        <div id="racquetRight"></div>
+        <div id="ball" style="width: 40px; height: 40px;"></div>
+    </div>
+
+    <script>
+        const game = new Tennis({
+            startButton: document.getElementById('start'),
+
+            field: document.getElementById('game'),
+
+            ball: document.getElementById('ball'),
+            ballSpeed: 10,
+
+            racquetLeft: document.getElementById('racquetLeft'),
+            racquetRight: document.getElementById('racquetRight'),
+            racquetHeight: 0.25,
+
+            playerLeftScore: document.getElementById('playerLeft'),
+            playerRightScore: document.getElementById('playerRight'),
+        });
+    </script>
+
+</body>
+
+</html>

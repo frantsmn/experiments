@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        function validPrompt(message, type) {
+            let answer;
+            let isValid;
+            do {
+                answer = prompt(message);
+                switch (type) {
+                    case 'number':
+                        isValid = (answer.length >= 1 && answer.length <= 3) && (Number(answer) > 0);
+                        answer = Number(answer);
+                        break;
+                    case 'string':
+                        isValid = answer.length;
+                        break;
+                    default:
+                        throw `error: validPrompt() -> setted invalid data type: '${type}'`;
+                        return;
+                }
+            } while (!isValid);
+            return answer;
+        }
+
+        let surname = validPrompt('Введите вашу фамилию', 'string');
+        let name = validPrompt('Введите ваше имя', 'string');
+        let secname = validPrompt('Введите ваше отчество', 'string');
+        let age = validPrompt('Введите ваш возраст в годах', 'number');
+        let sex = confirm('Ваш пол мужской?') ? 'мужской' : 'женский';
+        let pensionStatus = (age >= 61 && sex === 'мужской') || (age >= 56 && sex === 'женский') ? 'да' : 'нет';
+
+        alert(`
+            Ваше ФИО: ${surname} ${name} ${secname}
+            Ваш возраст в годах: ${age}
+            Ваш возраст в днях: ${age * 365}
+            Через 5 лет вам будет: ${age + 5}
+            Ваш пол: ${sex}
+            Вы на пенсии: ${pensionStatus}
+        `);
+
+    </script>
+</body>
+
+</html>

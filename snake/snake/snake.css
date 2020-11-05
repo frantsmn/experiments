@@ -1,0 +1,153 @@
+
+
+@keyframes scale {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(1.12);
+  }
+}
+
+.game-snake{
+  position: relative;
+  background-color: white;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.game-snake::before {
+  z-index: 1;
+  content: attr(data-welcome_text);
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  font-family: monospace;
+  font-size: 60px;
+  font-weight: 600;
+  text-shadow: 6px 6px 3px rgba(0, 0, 0, 0.15);
+  white-space: pre-line;
+  color: white;
+  cursor: pointer;
+  opacity: 1;
+  animation: scale 2.5s ease-in-out infinite alternate-reverse;
+  transition: top .3s ease-in-out;
+}
+
+.game-snake:focus::before {
+  top: -100%;
+}
+
+.game-snake::after {
+  content: attr(data-instruction_text);
+  position: absolute;
+  bottom: -100%;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 30px;
+  background-color: rgba(0, 0, 0, 0.3);
+  font-family: monospace;
+  font-size: 30px;
+  text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.15);
+  white-space: pre-line;
+  color: white;
+  transition: bottom .3s ease-in-out, opacity .2s ease-out;
+}
+
+.game-snake:focus::after {
+  bottom: 0;
+  opacity: 0;
+}
+
+.game-snake.paused:focus::after {
+  opacity: 1;
+}
+
+.game-snake .score {
+  user-select: none;
+  z-index: -1;
+  color: #f2f2f2;
+  font-size: 240px;
+  font-family: monospace;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.game-snake .feild {
+  border: solid 1px lightgrey;
+  padding: 5px;
+}
+
+.game-snake .row {
+  display: flex;
+}
+
+.game-snake .cell {
+  background-color: rgba(135, 135, 135, 0.15);
+  height: 20px;
+  width: 20px;
+  border: solid white 1px;
+  box-sizing: border-box;
+}
+
+.game-snake .apple {
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMTUwLjEgMTg0LjEgMzExLjUgNDAxLjIiIHZlcnNpb249IjEuMSIgdmlld0JveD0iMTUwLjEgMTg0LjEgMzExLjUgNDAxLjIiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0ibTQyOC42IDE4NC4xYzAuMyAxNy43IDEuMyAzNS43LTQuMyA1My02LjkgMjEuMy0yMS42IDM2LTQwLjYgNDYuOC01LjIgMi45LTEwLjggNS42LTE2LjcgNy45LTE4LjMgNy45LTM2LjcgMTUuNy01MS43IDMwLjgtNC4yLTcyLjYgMzQuNC0xMjcuNyAxMTMuMy0xMzguNXoiIGZpbGw9IiMwMDk3ODgiLz48cGF0aCBkPSJtNDM3LjUgNTE2LjhjLTkuOCAyMC4zLTIyLjkgMzguMy0zOS45IDUzLTE4LjMgMTUuNy0zOC42IDE5LTYwLjkgMTAuMi00LjktMi05LjgtMy45LTE0LjctNS45LTEwLjgtNC45LTIxLTQuNi0zMS44IDAtOC44IDMuNi0xOCA2LjktMjcuMiA5LjUtMTUuNyA0LjMtMjkuOCAwLjMtNDIuOS05LjItMTYuNy0xMi4xLTI4LjgtMjcuOC0zOS00NS41LTIxLTM2LjctMzIuNC03NS42LTMwLjgtMTE4LjIgMS42LTM5IDE2LjctNzEuMSA1MS40LTkxLjQgMTYuNC05LjUgMzQuMS0xNS4xIDUzLTkuMiA5LjIgMi42IDE3LjcgNy45IDI2LjIgMTIuMSA2LjUgMy4zIDEzLjEgNi41IDIwLjYgNi45LTYuNS0yMS4zLTIyLjMtNDcuNS03Ny42LTc1LjYgNS45LTguOCAxMS41LTE3LjQgMTcuNy0yNi41IDE3LjcgMTMuNCAzMi40IDI4LjUgNDUuMiA0NS4yIDEyLjggMTcgMjAgMzYuNyAyNi4yIDU4IDcuMi0zLjMgMTQuMS02LjUgMjEtOS41IDkuMi0zLjkgMTguMy04LjggMjguMi0xMS4xIDE0LjctMy42IDI4LjggMC43IDQxLjkgNy4yIDMyLjEgMTYgNTAuMSA0Mi42IDU1LjMgNzcuNiA2LjkgNDIuOS0yLjkgODMuNS0yMS45IDEyMi40eiIgZmlsbD0iI0RGNDczQSIvPjwvc3ZnPg==);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.game-snake .snake span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(60, 76, 76, 0.55);
+  animation: ease 1.4s breath infinite;
+}
+
+@keyframes breath {
+  0 {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.game-snake .snake.head span{
+  background-color: rgba(60, 76, 76, 0.85);
+}
+
+.game-snake .snake.boom span{
+  animation: boom ease-in-out 1s infinite, ease 1.4s breath infinite;;
+}
+
+ @keyframes boom {
+  0% {
+    box-shadow: inset 0px 0px 0px 20px rgba(225, 76, 76, 0);
+  }
+  50% {
+    box-shadow: inset 0px 0px 0px 20px rgba(225, 76, 76, 0.85);
+  }
+  100% {
+    box-shadow: inset 0px 0px 0px 20px rgba(225, 76, 76, 0);
+  }
+}

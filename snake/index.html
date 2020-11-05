@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <title>Simple Snake</title>
+    <link rel="stylesheet" href="snake/snake.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="snake/snake.js"></script>
+  </head>
+
+  <body>
+    <h1>Simple Snake on JavaScript</h1>
+    <div id="game"></div>
+
+    <script>
+      new Snake({
+        containerId: "game",
+        feildSize: 15,
+        winScore: 50,
+        speed: 140
+      });
+    </script>
+  </body>
+
+</html>
