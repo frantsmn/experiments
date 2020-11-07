@@ -2,6 +2,18 @@ import * as THREE from 'http://three/build/three.module.js';
 import { OrbitControls } from 'http://three/jsm/controls/OrbitControls.js';
 import { TWEEN } from 'http://three/jsm/libs/tween.module.min.js';
 
+import Timeline from './timeline.js';
+
+
+new Timeline({
+	element: document.getElementById('section-2'),
+	throttle: 10,
+	onChange: (p) => {
+		document.getElementById('section-2').style.transform = `rotateY(${p - 50}deg) rotateX(${-p - 50}deg) translateZ(${-p}px)`;
+		document.getElementById('section-2').style.perspective = `${ p-50}px`
+	}
+});
+
 const container = document.getElementById('canvas-container');
 let camera, scene, renderer, controls, raycaster, mouse, intersects;
 let tween = new TWEEN.Tween();
@@ -30,60 +42,21 @@ function throttle(callback, limit) {
 	}
 }
 
-function debounce(func, wait, immediate) {
-	let timeout;
-
-	// Эта функция выполняется, когда событие DOM вызвано.
-	return function executedFunction() {
-		// Сохраняем контекст this и любые параметры,
-		// переданные в executedFunction.
-		const context = this;
-		const args = arguments;
-
-		// Функция, вызываемая по истечению времени debounce.
-		const later = function () {
-			// Нулевой timeout, чтобы указать, что debounce закончилась.
-			timeout = null;
-
-			// Вызываем функцию, если immediate !== true,
-			// то есть, мы вызываем функцию в конце, после wait времени.
-			if (!immediate) func.apply(context, args);
-		};
-
-		// Определяем, следует ли нам вызывать функцию в начале.
-		const callNow = immediate && !timeout;
-
-		// clearTimeout сбрасывает ожидание при каждом выполнении функции.
-		// Это шаг, который предотвращает выполнение функции.
-		clearTimeout(timeout);
-
-		// Перезапускаем период ожидания debounce.
-		// setTimeout возвращает истинное значение / truthy value
-		// (оно отличается в web и node)
-		timeout = setTimeout(later, wait);
-
-		// Вызываем функцию в начале, если immediate === true
-		if (callNow) func.apply(context, args);
-	};
-};
-
-
 function onScroll() {
 	outputScrollY.value = scrollY = window.scrollY;
 
 	let v3 = new THREE.Vector3();
 	v3.y = startCameraPosition.y - scrollY * 0.001;
-	console.log(v3.y);
 
 	new TWEEN.Tween(camera.position)
 		.to(v3, 2000)
 		.easing(TWEEN.Easing.Quadratic.Out)
 		.start();
 }
-let debouncedOnScroll = throttle(onScroll, 50);
+let debouncedOnScroll = throttle(onScroll, 500);
 
-init();
-animate();
+// init();
+// animate();
 
 function createCube() {
 	const box = new THREE.Mesh(
@@ -123,12 +96,12 @@ function onMouseMove(event) {
 	// (-1 to +1) for both components
 	outputX.value = mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
 	outputY.value = mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
-	const vector3 = new THREE.Vector3( mouse.x * 3, 1, -mouse.y * 3)
+	const vector3 = new THREE.Vector3(mouse.x * 3, 1, -mouse.y * 3)
 
 	groupLookAt(group, vector3);
 }
-window.addEventListener('mousemove', onMouseMove, false);
-window.addEventListener('scroll', debouncedOnScroll, false);
+// window.addEventListener('mousemove', onMouseMove, false);
+// window.addEventListener('scroll', debouncedOnScroll, false);
 
 
 function init() {
@@ -172,11 +145,11 @@ function init() {
 }
 
 //#region ON WINDOW RESIZE
-window.addEventListener('resize', () => {
-	camera.aspect = container.offsetWidth / container.offsetHeight;
-	camera.updateProjectionMatrix();
-	renderer.setSize(container.offsetWidth, container.offsetHeight);
-}, false);
+// window.addEventListener('resize', () => {
+// 	camera.aspect = container.offsetWidth / container.offsetHeight;
+// 	camera.updateProjectionMatrix();
+// 	renderer.setSize(container.offsetWidth, container.offsetHeight);
+// }, false);
 //#endregion
 
 function animate() {

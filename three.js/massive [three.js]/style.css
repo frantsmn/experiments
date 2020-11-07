@@ -1,13 +1,20 @@
 body {
 	height: 500vh;
+	overflow-x: hidden;
 }
 
 .section {
+	color: #fff;
 	background: rgba(255, 255, 255, 0.1);
 	margin: 10px;
 	border-radius: 5px;
-	border: rgba(255, 255, 255, 0.3) 2px solid;
+	border: rgba(117, 54, 54, 0.1) 2px solid;
 	height: calc(100vh - 20px);
+	transition: transform 3s cubic-bezier(0, 0.96, 0.22, 0.93);
+}
+
+#section-2 {
+	transform: rotateY(0.9deg) rotateX(-0.4deg);
 }
 
 .canvas-container {
@@ -31,9 +38,10 @@ body {
 }
 
 .info-panel input {
-	color: rgb(0, 0, 0);
+	color: #000;
 	margin: 5px;
 	background: none;
 	border: #000 2px solid;
-	height: 15;
+	height: 20px;
+	font-size: 15px;
 }
